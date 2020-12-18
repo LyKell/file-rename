@@ -23,4 +23,7 @@ def retrieve_file(folder=os.getcwd()):
 
 def rename_file(f, new_name, extension, folder):
     new_file = os.path.join(folder, new_name + extension)
-    os.rename(f, new_file)
+    try:
+        os.rename(f, new_file)
+    except FileExistsError:
+        os.remove(f)
