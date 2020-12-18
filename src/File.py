@@ -17,8 +17,17 @@ def open_file(folder, filename):
     path = os.path.join(folder, filename)
     _, extension = os.path.splitext(path)
 
-    f = open(path, 'rb').read()
-    hash_code = hashlib.md5(f).hexdigest()
+    f = open(path, 'rb')
+    name = os.path.basename(f.name)
+    name = os.path.splitext(name)
+    
+    fichier = f.read()
+    f.close()
+
+    hash_code = hashlib.md5(fichier).hexdigest()
+
+    if name[0] == hash_code:
+        return
 
     rename_file(path, hash_code, extension, folder)
 
@@ -31,6 +40,8 @@ def retrieve_file(folder=os.getcwd()):
     """
     reg = re.compile('[.]')
 
+    folder = folder.replace("\"", "")
+    
     for subdir, _, files in os.walk(folder):
         if not re.search(reg, subdir):
             for f in files:
