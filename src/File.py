@@ -5,6 +5,7 @@ import os
 import sys
 import hashlib
 import shutil
+import re
 
 def open_file(folder, filename):
     """Opens a file and calculates its hashcode.
@@ -28,8 +29,14 @@ def retrieve_file(folder=os.getcwd()):
     Args:
         folder (str, optional): the source folder of the files to rename. Defaults to current dir.
     """
-    for filename in os.listdir(folder):
-        open_file(folder, filename)
+    reg = re.compile('[.]')
+
+    for subdir, _, files in os.walk(folder):
+        if not re.search(reg, subdir):
+            for f in files:
+                if not re.match(reg, f):
+                    open_file(subdir, f)
+            
 
 
 def rename_file(f, name, extension, folder):
