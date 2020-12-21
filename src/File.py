@@ -7,7 +7,7 @@ import hashlib
 import shutil
 import re
 
-def open_file(folder, filename):
+def open_file(folder, filename, extension):
     """Opens a file and calculates its hashcode.
 
     Args:
@@ -15,7 +15,6 @@ def open_file(folder, filename):
         filename (str): the file name.
     """
     path = os.path.join(folder, filename)
-    _, extension = os.path.splitext(path)
 
     f = open(path, 'rb')
     name = os.path.basename(f.name)
@@ -45,8 +44,9 @@ def retrieve_file(folder=os.getcwd()):
     for subdir, _, files in os.walk(folder):
         if not re.search(reg, subdir):
             for f in files:
-                if not re.match(reg, f):
-                    open_file(subdir, f)
+                _, extension = os.path.splitext(f)
+                if not re.match(reg, f) and extension != ".py":
+                    open_file(subdir, f, extension)
             
 
 
