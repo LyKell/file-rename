@@ -1,10 +1,10 @@
-# Images Rename
+# Files Rename
 
-A tool to rename images
+A tool to rename files
 
 ## Introduction
 
-This program renames images by their hashcode.
+This program renames files by their hashcode.
 
 It can be changed to rename any type of file you want.
 
