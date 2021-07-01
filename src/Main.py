@@ -1,12 +1,13 @@
-#!/usr/bin/python
-#-*- coding: utf-8 -*-
+# !/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import sys
 import File
 
+
 def main():
     print("Renaming files...")
-    if (len(sys.argv) != 2):
+    if len(sys.argv) != 2:
         File.retrieve_file()
 
     else:
@@ -17,4 +18,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
